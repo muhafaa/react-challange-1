@@ -1,0 +1,51 @@
+.background {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  position: fixed;
+  background-image: url('https://ygoprodeck.com/wp-content/uploads/2017/08/bg_large.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bg-custom-opacity {
+  background-color: rgba(37, 37, 37, 0.472) !important;
+}
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  background-size: contain;
+  color: white;
+  font-size: 1.5em;
+}
+
+.stick {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 20px;
+}
+
+.kartu {
+  transition: 0.4s;
+  box-shadow: 1px 1px 0.4rem 1px;
+  cursor: pointer;
+}
+
+.kartu:hover {
+  transform: scale(1.01, 1.01) translate(1px, 1px);
+}
+
+.show-more {
+  color: blue;
+  cursor: pointer;
+}
+
+.show-more:hover {
+  color: rgba(65, 65, 255, 0.979);
+  text-decoration: underline;
+}
