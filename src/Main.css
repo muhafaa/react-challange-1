@@ -10,6 +10,14 @@
   background-size: cover;
   width: 100vw;
   height: 100vh;
+  z-index: -100;
+}
+
+.custom-gradient {
+  background: rgb(179, 93, 22);
+  background: linear-gradient(180deg,
+      rgba(179, 93, 22, 1) 45%,
+      rgba(199, 147, 51, 1) 100%);
 }
 
 .bg-custom-opacity {
@@ -48,4 +56,13 @@
 .show-more:hover {
   color: rgba(65, 65, 255, 0.979);
   text-decoration: underline;
+}
+
+.bg-custom-gold {
+  background: #CF7B21 !important;
+}
+
+.bg-custom-cream {
+  background: #B5A684 !important;
+  color: rgb(47, 42, 28) !important;
 }
