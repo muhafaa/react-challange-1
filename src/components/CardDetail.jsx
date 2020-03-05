@@ -27,7 +27,7 @@ function CardDetail(props) {
           </Link>
         </Card>
         {(() => {
-          if (!deckList.some((deck) => deck.id === props.cardDetail.id)) {
+          if (!deckList.some((deck) => deck === props.cardDetail.id)) {
             return (
               <Card
                 className="mt-3 p-1"

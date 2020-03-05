@@ -1,9 +1,11 @@
-function addToDeck(step) {
-  return {
-    type: 'ADD_DECK',
-    payload: {
-      step
-    }
+function addToDeck(card) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'ADD_DECK',
+      payload: {
+        card
+      }
+    })
   }
 }
 

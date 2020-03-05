@@ -9,6 +9,7 @@ import CardDetail from '../components/CardDetail'
 
 const MyDeck = (props) => {
   const deckList = useSelector((state) => state.deckReducer.deckList)
+  const cardList = useSelector((state) => state.cardReducer.cardList)
   const [cardDetail, setCardDetail] = useState({})
   return (
     <>
@@ -41,10 +42,11 @@ const MyDeck = (props) => {
               >
                 <Row>
                   {deckList.map((deck, i) => {
+                    let cardPreview = cardList.find((card) => card.id === deck)
                     return (
                       <CardPreview
                         key={i}
-                        item={deck}
+                        item={cardPreview}
                         setDetail={(card) => {
                           setCardDetail(card)
                         }}

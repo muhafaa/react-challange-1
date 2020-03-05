@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Loading from '../components/Loading'
@@ -37,7 +37,6 @@ class CardDetailPage extends Component {
       url: 'https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + params.id
     })
       .then(({ data }) => {
-        console.log(data[0])
         this.setState({
           card: data[0]
         })
@@ -48,7 +47,6 @@ class CardDetailPage extends Component {
   }
 
   render() {
-    console.log(this.props.deckList)
     return (
       <div className="container text-white">
         {(() => {
@@ -60,14 +58,17 @@ class CardDetailPage extends Component {
             return (
               <>
                 <div className="d-flex justify-content-between mt-5">
-                  <Link to="/">
-                    <Button className="font-weight-bold text-uppercase">
-                      Back To Home
-                    </Button>
-                  </Link>
+                  <Button
+                    className="font-weight-bold text-uppercase"
+                    onClick={() => {
+                      this.props.history.goBack()
+                    }}
+                  >
+                    Back
+                  </Button>
                   {(() => {
                     const { deckList } = this.props
-                    if (!deckList.some((deck) => deck.id === card.id)) {
+                    if (!deckList.some((deck) => deck === card.id)) {
                       return (
                         <Button
                           className="font-weight-bold text-uppercase"
@@ -99,4 +100,7 @@ class CardDetailPage extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardDetailPage)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(CardDetailPage))
