@@ -2,56 +2,47 @@ import React, { Component } from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import axios from 'axios'
 import Loading from '../components/Loading'
 import LeftSection from '../components/cardDetailPage/LeftSection'
 import RightSection from '../components/cardDetailPage/RightSection'
 
 // actions
 import addToDeck from '../actions/addToDeck'
+import getCardDetail from '../actions/getCardDetail'
 
 function mapStateToProps(state) {
   return {
-    deckList: state.deckReducer.deckList
+    deckList: state.deckReducer.deckList,
+    cardDetail: state.cardReducer.cardDetail
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addToDeck: (card) => dispatch(addToDeck(card))
+    addToDeck: (card) => dispatch(addToDeck(card)),
+    getCardDetail: (cardId) => dispatch(getCardDetail(cardId))
   }
 }
 
 class CardDetailPage extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      card: {}
-    }
+    this.state = {}
   }
 
   componentDidMount() {
     const { params } = this.props.match
-    axios({
-      method: 'GET',
-      url: 'https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + params.id
-    })
-      .then(({ data }) => {
-        this.setState({
-          card: data[0]
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    const { getCardDetail } = this.props
+    getCardDetail(params.id)
   }
 
   render() {
     return (
-      <div className="container text-white">
+      <div className="container text-white" data-testid="card-detail-page">
         {(() => {
-          const { card } = this.state
-          if (!card.hasOwnProperty('id')) {
+          const { cardDetail } = this.props
+
+          if (!cardDetail.hasOwnProperty('id')) {
             return <Loading />
           } else {
             // Contentnya disini
@@ -68,13 +59,13 @@ class CardDetailPage extends Component {
                   </Button>
                   {(() => {
                     const { deckList } = this.props
-                    if (!deckList.some((deck) => deck === card.id)) {
+                    if (!deckList.some((deck) => deck === cardDetail.id)) {
                       return (
                         <Button
                           className="font-weight-bold text-uppercase"
                           variant="success"
                           onClick={() => {
-                            this.props.addToDeck(card)
+                            this.props.addToDeck(cardDetail)
                           }}
                         >
                           Add to deck
@@ -85,10 +76,10 @@ class CardDetailPage extends Component {
                 </div>
                 <Row className="my-5">
                   <Col sm={12} md={3} className="flex-column">
-                    <LeftSection card={this.state.card} />
+                    <LeftSection card={this.props.cardDetail} />
                   </Col>
                   <Col sm={12} md={9} className="flex-column">
-                    <RightSection card={this.state.card} />
+                    <RightSection card={this.props.cardDetail} />
                   </Col>
                 </Row>
               </>

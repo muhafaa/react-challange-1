@@ -94,7 +94,12 @@ class HomePage extends Component {
       <Row className="container-fluid mx-auto my-2">
         {!this.props.loading ? (
           <>
-            <Col sm={12} md={3} className="card p-5 my-3 bg-transparent">
+            <Col
+              sm={12}
+              md={3}
+              className="card p-5 my-3 bg-transparent"
+              data-testid="homepage"
+            >
               {(() => {
                 if (this.state.cardDetail.hasOwnProperty('id')) {
                   const { cardDetail } = this.state
@@ -116,7 +121,7 @@ class HomePage extends Component {
                     resetError()
                   }, 5000)
                   return (
-                    <Alert variant="danger">
+                    <Alert variant="danger" data-testid="error-not-found">
                       Card name "<strong>{errNotFound}</strong>" is not found
                     </Alert>
                   )
@@ -179,6 +184,7 @@ class HomePage extends Component {
                     }
                     return cardList.length
                   })()}
+                  data-testid="page-nav"
                 />
               </div>
             </Col>

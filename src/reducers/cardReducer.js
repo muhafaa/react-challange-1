@@ -1,5 +1,6 @@
 const initialState = {
   cardList: [],
+  cardDetail: {},
   filter: [],
   errNotFound: null,
   loading: false
@@ -9,6 +10,9 @@ function cardReducer(state = initialState, action) {
   switch (action.type) {
     case 'FETCH_CARD_LIST':
       return { ...state, cardList: action.payload.cards }
+
+    case 'FETCH_CARD_DETAIL':
+      return { ...state, cardDetail: action.payload.card }
 
     case 'FILTER_CARD':
       return { ...state, filter: action.payload.filter }

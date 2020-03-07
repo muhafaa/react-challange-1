@@ -1,17 +1,21 @@
 import axios from 'axios'
-function getCardList() {
+function getCardDetail(cardId) {
   return (dispatch, getState) => {
     dispatch({
       type: 'ON_FETCHING'
     })
     return axios
-      .get('https://db.ygoprodeck.com/api/v6/cardinfo.php')
+      .get('https://db.ygoprodeck.com/api/v6/cardinfo.php', {
+        params: {
+          id: cardId
+        }
+      })
       .then(({ data }) => {
-        const cards = data
+        const card = data[0]
         return dispatch({
-          type: 'FETCH_CARD_LIST',
+          type: 'FETCH_CARD_DETAIL',
           payload: {
-            cards
+            card
           }
         })
       })
@@ -29,4 +33,4 @@ function getCardList() {
   }
 }
 
-export default getCardList
+export default getCardDetail

@@ -16,15 +16,21 @@ const MyDeck = (props) => {
       {(() => {
         if (deckList.length < 1) {
           return (
-            <Row className="h-100">
+            <Row className="h-100" data-testid="deck-page">
               <EmptyDeck />
             </Row>
           )
         } else {
           return (
-            <Row className="container-fluid mx-auto my-5">
+            <Row
+              className="container-fluid mx-auto my-5"
+              data-testid="deck-page"
+            >
               <Col sm={12} className="card bg-custom-cream p-3 my-2 mx-auto">
-                <h2 className="font-weight-bold text-uppercase text-center m-0">
+                <h2
+                  className="font-weight-bold text-uppercase text-center m-0"
+                  data-testid="deck-page-title"
+                >
                   My Deck
                 </h2>
               </Col>

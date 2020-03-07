@@ -1,7 +1,7 @@
-import React from 'react';
-import {Col, Image} from 'react-bootstrap';
+import React from 'react'
+import { Col, Image } from 'react-bootstrap'
 
-function CardPreview({item, setDetail}) {
+function CardPreview({ item, setDetail }) {
   return (
     <Col key={item.id} sm={4} md={3} lg={3} className="my-2">
       <Image
@@ -11,6 +11,7 @@ function CardPreview({item, setDetail}) {
         onClick={() => {
           setDetail(item)
         }}
+        data-testid="card-preview"
       />
     </Col>
   )
